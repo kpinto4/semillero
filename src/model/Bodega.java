@@ -68,3 +68,5 @@ public class Bodega {
                " | Estado: " + (estadoBodega != null ? estadoBodega : "Desconocido");
     }
 }
+
+

@@ -1,21 +1,20 @@
 package dao;
 
-import model.Bodega;
+import model.Producto;
 import util.DatabaseConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BodegaDAO {
+public class ProductoDAO {
 
     // CREATE
-    public boolean insert(Bodega b) {
-        String sql = "INSERT INTO bodega (nombre, capacidad, ubicacion) VALUES (?, ?, ?)";
+    public boolean insert(Producto p) {
+        String sql = "INSERT INTO producto (nombre, descripcion) VALUES (?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, b.getNombre());
-            stmt.setDouble(2, b.getCapacidad());
-            stmt.setString(3, b.getUbicacion());
+            stmt.setString(1, p.getNombre());
+            stmt.setString(2, p.getDescripcion());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -24,18 +23,17 @@ public class BodegaDAO {
     }
 
     // READ
-    public List<Bodega> getAll() {
-        List<Bodega> list = new ArrayList<>();
-        String sql = "SELECT * FROM bodega ORDER BY id_bodega";
+    public List<Producto> getAll() {
+        List<Producto> list = new ArrayList<>();
+        String sql = "SELECT * FROM producto ORDER BY id_producto";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                list.add(new Bodega(
-                        rs.getInt("id_bodega"),
+                list.add(new Producto(
+                        rs.getInt("id_producto"),
                         rs.getString("nombre"),
-                        rs.getDouble("capacidad"),
-                        rs.getString("ubicacion")
+                        rs.getString("descripcion")
                 ));
             }
         } catch (SQLException e) {
@@ -45,14 +43,13 @@ public class BodegaDAO {
     }
 
     // UPDATE
-    public boolean update(Bodega b) {
-        String sql = "UPDATE bodega SET nombre=?, capacidad=?, ubicacion=? WHERE id_bodega=?";
+    public boolean update(Producto p) {
+        String sql = "UPDATE producto SET nombre=?, descripcion=? WHERE id_producto=?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, b.getNombre());
-            stmt.setDouble(2, b.getCapacidad());
-            stmt.setString(3, b.getUbicacion());
-            stmt.setInt(4, b.getIdBodega());
+            stmt.setString(1, p.getNombre());
+            stmt.setString(2, p.getDescripcion());
+            stmt.setInt(3, p.getIdProducto());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -62,7 +59,7 @@ public class BodegaDAO {
 
     // DELETE
     public boolean delete(int id) {
-        String sql = "DELETE FROM bodega WHERE id_bodega=?";
+        String sql = "DELETE FROM producto WHERE id_producto=?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);

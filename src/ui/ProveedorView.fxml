@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="20" style="-fx-background-color: #E3F2FD;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProveedorController">
+
+    <padding>
+        <Insets bottom="40" left="40" right="40" top="40" />
+    </padding>
+
+    <Label style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #0D47A1;" text="Gestionar Proveedores">
+        <font>
+            <Font name="Arial" size="24" />
+        </font>
+        <effect>
+            <DropShadow color="#90CAF9" radius="3" />
+        </effect>
+    </Label>
+
+    <TextField fx:id="nombreField" prefWidth="300" promptText="Nombre" />
+    <TextField fx:id="telefonoField" prefWidth="300" promptText="Teléfono" />
+    <TextField fx:id="correoField" prefWidth="300" promptText="Correo" />
+    <TextField fx:id="ciudadField" prefWidth="300" promptText="Ciudad" />
+    <CheckBox fx:id="activoCheckBox" text="Activo" />
+
+    <TableView fx:id="proveedorTable" prefHeight="200" prefWidth="700">
+        <columns>
+            <TableColumn fx:id="idColumn" prefWidth="50" text="ID" />
+            <TableColumn fx:id="nombreColumn" prefWidth="150" text="Nombre" />
+            <TableColumn fx:id="telefonoColumn" prefWidth="100" text="Teléfono" />
+            <TableColumn fx:id="correoColumn" prefWidth="150" text="Correo" />
+            <TableColumn fx:id="ciudadColumn" prefWidth="100" text="Ciudad" />
+            <TableColumn fx:id="activoColumn" prefWidth="80" text="Activo" />
+        </columns>
+    </TableView>
+
+    <Button fx:id="btnAdd" prefWidth="300" text="Agregar Proveedor" />
+    <Button fx:id="btnUpdate" prefWidth="300" text="Actualizar Proveedor" />
+    <Button fx:id="btnDelete" prefWidth="300" text="Eliminar Proveedor" />
+    <Button fx:id="btnFetch" prefWidth="300" text="Mostrar Todos" />
+
+</VBox>

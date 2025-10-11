@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminMenuController">
+
+    <left>
+        <VBox alignment="TOP_CENTER" prefHeight="490.0" prefWidth="256.0" spacing="20" style="-fx-background-color: #0D47A1;" stylesheets="@Style.css">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="30" />
+            </padding>
+
+            <Label style="-fx-text-fill: white; -fx-font-size: 20;" text="📦 Inventario" />
+
+            <Button fx:id="btnProductos" onAction="#gestionarProductos" prefHeight="32.0" prefWidth="300.0" styleClass="sidebar-button" text="Gestionar Productos" />
+            <Button fx:id="btnProveedores" onAction="#gestionarProveedores" prefHeight="32.0" prefWidth="300.0" styleClass="sidebar-button" text="Gestionar Proveedores" />
+            <Button fx:id="btnPedidos" onAction="#gestionarPedidos" prefHeight="32.0" prefWidth="300.0" styleClass="sidebar-button" text="Gestionar Pedidos" />
+            <Button fx:id="btnLotes" onAction="#gestionarLotes" prefHeight="32.0" prefWidth="300.0" styleClass="sidebar-button" text="Gestionar Lotes" />
+            <Button fx:id="btnBodegas" onAction="#gestionarBodegas" prefHeight="32.0" prefWidth="300.0" styleClass="sidebar-button" text="Gestionar Bodegas" />
+            <Button fx:id="btnInventario" onAction="#gestionarInventario" prefHeight="32.0" prefWidth="300.0" styleClass="sidebar-button" text="Gestionar Inventario" />
+            
+        </VBox>
+    </left>
+
+    <center>
+        <StackPane fx:id="adminContentPane" style="-fx-background-color: #E3F2FD;" stylesheets="@Style.css">
+            <Label style="-fx-font-size: 24; -fx-text-fill: #0D47A1;" text="Bienvenido al sistema de Inventario" />
+        </StackPane>
+    </center>
+
+</BorderPane>

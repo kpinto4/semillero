@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="1055.0" prefWidth="780.0" spacing="20" style="-fx-background-color: #E3F2FD;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoteController">
+
+    <padding>
+        <Insets bottom="40" left="40" right="40" top="40" />
+    </padding>
+
+    <Label style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #0D47A1;" text="Gestionar Lotes">
+        <font>
+            <Font name="Arial" size="24" />
+        </font>
+        <effect>
+            <DropShadow color="#90CAF9" radius="3" />
+        </effect>
+    </Label>
+
+    <!-- ComboBox para las llaves foráneas -->
+    <ComboBox fx:id="productoComboBox" prefWidth="300" promptText="Seleccionar Producto" />
+    <ComboBox fx:id="pedidoComboBox" prefWidth="300" promptText="Seleccionar Pedido" />
+
+    <!-- Otros atributos -->
+    <TextField fx:id="pesoField" prefWidth="300" promptText="Peso Total (kg)" />
+    <TextField fx:id="humedadField" prefWidth="300" promptText="Humedad (%)" />
+    <TextField fx:id="fermentacionField" prefWidth="300" promptText="Fermentación (%)" />
+    <DatePicker fx:id="cosechaPicker" prefWidth="300" promptText="Fecha Cosecha" />
+    <DatePicker fx:id="ingresoPicker" prefWidth="300" promptText="Fecha Ingreso" />
+    <DatePicker fx:id="salidaPicker" prefWidth="300" promptText="Fecha Salida" />
+
+    <ComboBox fx:id="estadoCombo" prefWidth="300" promptText="Estado" />
+
+    <!-- Tabla de lotes -->
+    <TableView fx:id="loteTable" prefHeight="200" prefWidth="700">
+        <columns>
+            <TableColumn fx:id="idColumn" prefWidth="50" text="ID" />
+            <TableColumn fx:id="productoColumn" prefWidth="120" text="Producto" />
+            <TableColumn fx:id="pedidoColumn" prefWidth="120" text="Pedido" />
+            <TableColumn fx:id="pesoColumn" prefWidth="80" text="Peso" />
+            <TableColumn fx:id="humedadColumn" prefWidth="80" text="Humedad" />
+            <TableColumn fx:id="fermentacionColumn" prefWidth="100" text="Fermentación" />
+            <TableColumn fx:id="estadoColumn" prefWidth="100" text="Estado" />
+        </columns>
+    </TableView>
+
+    <!-- Botones de acción -->
+    <Button fx:id="btnAdd" prefWidth="300" text="Agregar Lote" />
+    <Button fx:id="btnUpdate" prefWidth="300" text="Actualizar Lote" />
+    <Button fx:id="btnDelete" prefWidth="300" text="Eliminar Lote" />
+    <Button fx:id="btnFetch" prefWidth="300" text="Mostrar Todos" />
+
+</VBox>

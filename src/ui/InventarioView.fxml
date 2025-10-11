@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.InventarioController"
+            fitToWidth="true"
+            style="-fx-background: #E3F2FD;">
+    <content>
+        <VBox alignment="TOP_CENTER"
+              spacing="20"
+              style="-fx-background-color: #E3F2FD;"
+              prefWidth="700"
+              maxWidth="Infinity">
+
+            <padding>
+                <Insets top="30" right="40" bottom="40" left="40" />
+            </padding>
+
+            <!-- 🟦 Título -->
+            <Label text="Gestión de Inventario"
+                   style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: #0D47A1;">
+                <font>
+                    <Font name="Arial" size="26" />
+                </font>
+                <effect>
+                    <DropShadow color="#90CAF9" radius="3" />
+                </effect>
+            </Label>
+
+            <!-- 🧭 Sección de selección de dependencias -->
+            <TitledPane text="Seleccionar Dependencias" expanded="true" collapsible="false" style="-fx-font-weight: bold;">
+                <VBox spacing="10" alignment="CENTER">
+                    <ComboBox fx:id="bodegaComboBox" prefWidth="400" promptText="Seleccionar Bodega" />
+                    <ComboBox fx:id="loteComboBox" prefWidth="400" promptText="Seleccionar Lote" />
+                </VBox>
+            </TitledPane>
+
+            <!-- 🧾 Sección de datos del inventario -->
+            <TitledPane text="Detalles del Inventario" expanded="true" collapsible="false">
+                <VBox spacing="10" alignment="CENTER">
+                    <DatePicker fx:id="fechaIngresoPicker" prefWidth="400" promptText="Fecha de Ingreso" />
+                    <DatePicker fx:id="fechaSalidaPicker" prefWidth="400" promptText="Fecha de Salida" />
+                    <TextField fx:id="estadoField" prefWidth="400" promptText="Estado (en_bodega / entregado)" />
+                    <TextField fx:id="cantidadField" prefWidth="400" promptText="Cantidad (kg)" />
+                    <TextField fx:id="direccionField" prefWidth="400" promptText="Dirección de Almacenamiento" />
+                </VBox>
+            </TitledPane>
+
+            <!-- 📊 Tabla de inventario -->
+            <TitledPane text="Inventario Registrado" expanded="true" collapsible="false">
+                <VBox spacing="10">
+                    <TableView fx:id="inventarioTable" prefHeight="250" prefWidth="650">
+                        <columns>
+                            <TableColumn fx:id="idColumn" prefWidth="60" text="ID" />
+                            <TableColumn fx:id="bodegaColumn" prefWidth="100" text="Bodega" />
+                            <TableColumn fx:id="loteColumn" prefWidth="100" text="Lote" />
+                            <TableColumn fx:id="fechaIngresoColumn" prefWidth="120" text="Ingreso" />
+                            <TableColumn fx:id="fechaSalidaColumn" prefWidth="120" text="Salida" />
+                            <TableColumn fx:id="estadoColumn" prefWidth="100" text="Estado" />
+                            <TableColumn fx:id="cantidadColumn" prefWidth="100" text="Cantidad" />
+                            <TableColumn fx:id="direccionColumn" prefWidth="150" text="Dirección" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </TitledPane>
+
+            <!-- ⚙️ Botones de acción -->
+            <HBox spacing="15" alignment="CENTER">
+                <Button fx:id="btnAdd" text="Agregar" styleClass="primary-button" prefWidth="150" />
+                <Button fx:id="btnUpdate" text="Actualizar" styleClass="info-button" prefWidth="150" />
+                <Button fx:id="btnDelete" text="Eliminar" styleClass="danger-button" prefWidth="150" />
+                <Button fx:id="btnFetch" text="Mostrar Todo" styleClass="neutral-button" prefWidth="150" />
+            </HBox>
+
+        </VBox>
+    </content>
+</ScrollPane>
+

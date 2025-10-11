@@ -13,7 +13,8 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         primaryStage = stage;
-        cargarVista("menu.fxml", "Gestión de Inventario - Bodega");
+        // Cargamos directamente el menú principal (AdminMenu.fxml)
+        cargarVista("/ui/AdminMenu.fxml", "Gestión de Inventario - Bodega");
     }
 
     public static void cargarVista(String rutaFXML, String titulo) {
@@ -21,16 +22,14 @@ public class MainApp extends Application {
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(rutaFXML));
             Parent root = loader.load();
 
-            // Guardamos tamaño actual de la ventana
-            double ancho = primaryStage.getWidth();
-            double alto = primaryStage.getHeight();
-
+            Scene scene = new Scene(root);
             primaryStage.setTitle(titulo);
-            primaryStage.setScene(new Scene(root, ancho, alto));
+            primaryStage.setScene(scene);
             primaryStage.show();
 
         } catch (Exception e) {
             e.printStackTrace();
+            System.err.println("❌ Error al cargar la vista: " + rutaFXML);
         }
     }
 

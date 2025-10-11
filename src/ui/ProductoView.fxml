@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="711.0" prefWidth="660.0" spacing="20" style="-fx-background-color: #E3F2FD;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProductoController">
+
+    <padding>
+        <Insets bottom="40" left="40" right="40" top="40" />
+    </padding>
+
+    <Label style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #0D47A1;" text="Gestionar Productos">
+        <font>
+            <Font name="Arial" size="24" />
+        </font>
+        <effect>
+            <DropShadow color="#90CAF9" radius="3" />
+        </effect>
+    </Label>
+
+    <TextField fx:id="nombreField" prefWidth="300" promptText="Nombre del Producto" style="-fx-background-color: white; -fx-border-color: #BBDEFB; -fx-border-radius: 6;" stylesheets="@Style.css" />
+    <TextField fx:id="descripcionField" prefWidth="300" promptText="Descripción" style="-fx-background-color: white; -fx-border-color: #BBDEFB; -fx-border-radius: 6;" />
+
+    <TableView fx:id="productoTable" prefHeight="200" prefWidth="700" style="-fx-background-color: white; -fx-border-color: #BBDEFB;">
+        <columns>
+            <TableColumn fx:id="idColumn" prefWidth="50" text="ID" />
+            <TableColumn fx:id="nombreColumn" prefWidth="200" text="Nombre" />
+            <TableColumn fx:id="descripcionColumn" prefWidth="400" text="Descripción" />
+        </columns>
+    </TableView>
+
+    <Button fx:id="btnAdd" onAction="#addProducto" prefWidth="300" style="-fx-font-size: 16; -fx-background-color: #90CAF9; -fx-text-fill: white;" text="Agregar Producto" />
+    <Button fx:id="btnUpdate" onAction="#updateProducto" prefWidth="300" style="-fx-font-size: 16; -fx-background-color: #64B5F6; -fx-text-fill: white;" text="Actualizar Producto" />
+    <Button fx:id="btnDelete" onAction="#deleteProducto" prefWidth="300" style="-fx-font-size: 16; -fx-background-color: #42A5F5; -fx-text-fill: white;" text="Eliminar Producto" />
+    <Button fx:id="btnFetch" onAction="#fetchProductos" prefWidth="300" style="-fx-font-size: 16; -fx-background-color: #BBDEFB; -fx-text-fill: white;" text="Mostrar Todos los Productos" />
+
+</VBox>

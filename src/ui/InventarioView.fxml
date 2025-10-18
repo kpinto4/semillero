@@ -34,9 +34,16 @@
             </Label>
 
             <!-- 🧭 Sección de selección de dependencias -->
-            <TitledPane text="Seleccionar Dependencias" expanded="true" collapsible="false" style="-fx-font-weight: bold;">
+            <TitledPane text="Seleccionar Dependencias" expanded="true" collapsible="false"
+                        style="-fx-font-weight: bold;">
                 <VBox spacing="10" alignment="CENTER">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10" />
+                    </padding>
+                    <Label text="Seleccione la bodega:" style="-fx-font-weight: bold;" />
                     <ComboBox fx:id="bodegaComboBox" prefWidth="400" promptText="Seleccionar Bodega" />
+
+                    <Label text="Seleccione el lote:" style="-fx-font-weight: bold;" />
                     <ComboBox fx:id="loteComboBox" prefWidth="400" promptText="Seleccionar Lote" />
                 </VBox>
             </TitledPane>
@@ -44,17 +51,33 @@
             <!-- 🧾 Sección de datos del inventario -->
             <TitledPane text="Detalles del Inventario" expanded="true" collapsible="false">
                 <VBox spacing="10" alignment="CENTER">
-                    <DatePicker fx:id="fechaIngresoPicker" prefWidth="400" promptText="Fecha de Ingreso" />
-                    <DatePicker fx:id="fechaSalidaPicker" prefWidth="400" promptText="Fecha de Salida" />
-                    <TextField fx:id="estadoField" prefWidth="400" promptText="Estado (en_bodega / entregado)" />
-                    <TextField fx:id="cantidadField" prefWidth="400" promptText="Cantidad (kg)" />
-                    <TextField fx:id="direccionField" prefWidth="400" promptText="Dirección de Almacenamiento" />
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10" />
+                    </padding>
+
+                    <Label text="Fecha de Ingreso:" style="-fx-font-weight: bold;" />
+                    <DatePicker fx:id="fechaIngresoPicker" prefWidth="400" promptText="Seleccione la fecha de ingreso" />
+
+                    <Label text="Fecha de Salida:" style="-fx-font-weight: bold;" />
+                    <DatePicker fx:id="fechaSalidaPicker" prefWidth="400" promptText="Seleccione la fecha de salida" />
+
+                    <Label text="Estado del Inventario:" style="-fx-font-weight: bold;" />
+                    <TextField fx:id="estadoField" prefWidth="400" promptText="Ejemplo: en_bodega / entregado" />
+
+                    <Label text="Cantidad (kg):" style="-fx-font-weight: bold;" />
+                    <TextField fx:id="cantidadField" prefWidth="400" promptText="Ingrese la cantidad en kilogramos" />
+
+                    <Label text="Dirección de Almacenamiento:" style="-fx-font-weight: bold;" />
+                    <TextField fx:id="direccionField" prefWidth="400" promptText="Ejemplo: Pasillo A - Estante 3" />
                 </VBox>
             </TitledPane>
 
             <!-- 📊 Tabla de inventario -->
             <TitledPane text="Inventario Registrado" expanded="true" collapsible="false">
-                <VBox spacing="10">
+                <VBox spacing="10" alignment="CENTER">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10" />
+                    </padding>
                     <TableView fx:id="inventarioTable" prefHeight="250" prefWidth="650">
                         <columns>
                             <TableColumn fx:id="idColumn" prefWidth="60" text="ID" />
@@ -72,6 +95,9 @@
 
             <!-- ⚙️ Botones de acción -->
             <HBox spacing="15" alignment="CENTER">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10" />
+                </padding>
                 <Button fx:id="btnAdd" text="Agregar" styleClass="primary-button" prefWidth="150" />
                 <Button fx:id="btnUpdate" text="Actualizar" styleClass="info-button" prefWidth="150" />
                 <Button fx:id="btnDelete" text="Eliminar" styleClass="danger-button" prefWidth="150" />
@@ -81,4 +107,3 @@
         </VBox>
     </content>
 </ScrollPane>
-

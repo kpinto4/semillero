@@ -1,69 +1,63 @@
 package model;
 
-public class Proveedor {
-    private int idProveedor;
-    private String nombre;
-    private String telefono;
-    private String correo;
-    private String ciudad;
-    private boolean activo;
+import javafx.beans.property.*;
 
-    public Proveedor() {}
+public class Proveedor {
+    private final IntegerProperty idProveedor;
+    private final StringProperty nombre;
+    private final StringProperty telefono;
+    private final StringProperty correo;
+    private final StringProperty ciudad;
+    private final BooleanProperty activo;
+
+    public Proveedor() {
+        this.idProveedor = new SimpleIntegerProperty();
+        this.nombre = new SimpleStringProperty();
+        this.telefono = new SimpleStringProperty();
+        this.correo = new SimpleStringProperty();
+        this.ciudad = new SimpleStringProperty();
+        this.activo = new SimpleBooleanProperty();
+    }
 
     public Proveedor(int idProveedor, String nombre, String telefono, String correo, String ciudad, boolean activo) {
-        this.idProveedor = idProveedor;
-        this.nombre = nombre;
-        this.telefono = telefono;
-        this.correo = correo;
-        this.ciudad = ciudad;
-        this.activo = activo;
+        this.idProveedor = new SimpleIntegerProperty(idProveedor);
+        this.nombre = new SimpleStringProperty(nombre);
+        this.telefono = new SimpleStringProperty(telefono);
+        this.correo = new SimpleStringProperty(correo);
+        this.ciudad = new SimpleStringProperty(ciudad);
+        this.activo = new SimpleBooleanProperty(activo);
     }
 
-    public int getIdProveedor() {
-        return idProveedor;
-    }
+    // Getters y setters
+    public int getIdProveedor() { return idProveedor.get(); }
+    public void setIdProveedor(int idProveedor) { this.idProveedor.set(idProveedor); }
 
-    public void setIdProveedor(int idProveedor) {
-        this.idProveedor = idProveedor;
-    }
+    public String getNombre() { return nombre.get(); }
+    public void setNombre(String nombre) { this.nombre.set(nombre); }
 
-    public String getNombre() {
-        return nombre;
-    }
+    public String getTelefono() { return telefono.get(); }
+    public void setTelefono(String telefono) { this.telefono.set(telefono); }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public String getCorreo() { return correo.get(); }
+    public void setCorreo(String correo) { this.correo.set(correo); }
 
-    public String getTelefono() {
-        return telefono;
-    }
+    public String getCiudad() { return ciudad.get(); }
+    public void setCiudad(String ciudad) { this.ciudad.set(ciudad); }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
+    public boolean isActivo() { return activo.get(); }
+    public void setActivo(boolean activo) { this.activo.set(activo); }
 
-    public String getCorreo() {
-        return correo;
-    }
+    // Propiedades
+    public IntegerProperty idProveedorProperty() { return idProveedor; }
+    public StringProperty nombreProperty() { return nombre; }
+    public StringProperty telefonoProperty() { return telefono; }
+    public StringProperty correoProperty() { return correo; }
+    public StringProperty ciudadProperty() { return ciudad; }
+    public BooleanProperty activoProperty() { return activo; }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getCiudad() {
-        return ciudad;
-    }
-
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
-    }
-
-    public boolean isActivo() {
-        return activo;
-    }
-
-    public void setActivo(boolean activo) {
-        this.activo = activo;
+    // 👇 Agrega esto al final
+    @Override
+    public String toString() {
+        return getNombre();
     }
 }

@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
 import model.Lote;
 import model.Pedido;
@@ -25,7 +26,7 @@ public class LoteController {
     @FXML
     private TextField pesoField, humedadField, fermentacionField;
     @FXML
-    private DatePicker cosechaPicker, ingresoPicker, salidaPicker;
+    private DatePicker cosechaPicker, ingresoPicker;
     @FXML
     private ComboBox<String> estadoCombo;
     @FXML
@@ -74,11 +75,17 @@ public class LoteController {
                 pesoField.setText(String.valueOf(seleccionado.getPesoTotal()));
                 humedadField.setText(String.valueOf(seleccionado.getHumedad()));
                 fermentacionField.setText(String.valueOf(seleccionado.getFermentacion()));
-
                 cosechaPicker.setValue(seleccionado.getFechaCosecha() != null ? seleccionado.getFechaCosecha().toLocalDate() : null);
                 ingresoPicker.setValue(seleccionado.getFechaIngreso() != null ? seleccionado.getFechaIngreso().toLocalDate() : null);
-                salidaPicker.setValue(seleccionado.getFechaSalida() != null ? seleccionado.getFechaSalida().toLocalDate() : null);
                 estadoCombo.setValue(seleccionado.getEstado());
+            }
+        });
+
+        // 🔹 Permitir deseleccionar la fila con la tecla ESC
+        loteTable.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ESCAPE) {
+                loteTable.getSelectionModel().clearSelection();
+                clearFields();
             }
         });
     }
@@ -91,7 +98,6 @@ public class LoteController {
         humedadColumn.setCellValueFactory(new PropertyValueFactory<>("humedad"));
         fermentacionColumn.setCellValueFactory(new PropertyValueFactory<>("fermentacion"));
         estadoColumn.setCellValueFactory(new PropertyValueFactory<>("estado"));
-
         loteTable.setItems(loteList);
     }
 
@@ -124,7 +130,6 @@ public class LoteController {
             nuevo.setFermentacion(Double.parseDouble(fermentacionField.getText().trim()));
             nuevo.setFechaCosecha(Date.valueOf(cosechaPicker.getValue()));
             nuevo.setFechaIngreso(Date.valueOf(ingresoPicker.getValue()));
-            nuevo.setFechaSalida(Date.valueOf(salidaPicker.getValue()));
             nuevo.setEstado(estadoCombo.getValue());
 
             if (loteDAO.insert(nuevo)) {
@@ -155,7 +160,6 @@ public class LoteController {
             seleccionado.setFermentacion(Double.parseDouble(fermentacionField.getText().trim()));
             seleccionado.setFechaCosecha(Date.valueOf(cosechaPicker.getValue()));
             seleccionado.setFechaIngreso(Date.valueOf(ingresoPicker.getValue()));
-            seleccionado.setFechaSalida(Date.valueOf(salidaPicker.getValue()));
             seleccionado.setEstado(estadoCombo.getValue());
 
             if (loteDAO.update(seleccionado)) {
@@ -203,8 +207,7 @@ public class LoteController {
         if (productoComboBox.getValue() == null || pedidoComboBox.getValue() == null ||
                 pesoField.getText().isEmpty() || humedadField.getText().isEmpty() ||
                 fermentacionField.getText().isEmpty() || cosechaPicker.getValue() == null ||
-                ingresoPicker.getValue() == null || salidaPicker.getValue() == null ||
-                estadoCombo.getValue() == null) {
+                ingresoPicker.getValue() == null || estadoCombo.getValue() == null) {
             mostrarAlerta(Alert.AlertType.WARNING, "Campos vacíos", "Por favor, complete todos los campos.");
             return false;
         }
@@ -241,7 +244,6 @@ public class LoteController {
         fermentacionField.clear();
         cosechaPicker.setValue(null);
         ingresoPicker.setValue(null);
-        salidaPicker.setValue(null);
         estadoCombo.setValue(null);
         loteTable.getSelectionModel().clearSelection();
     }
@@ -255,4 +257,3 @@ public class LoteController {
         alerta.showAndWait();
     }
 }
-

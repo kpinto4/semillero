@@ -11,8 +11,11 @@ public class LoteDAO {
 
     // CREATE
     public boolean insert(Lote l) {
-        String sql = "INSERT INTO lote (id_producto, id_pedido, peso_total, humedad, fermentacion, fecha_cosecha, fecha_ingreso, fecha_salida, estado) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = """
+            INSERT INTO lote (id_producto, id_pedido, peso_total, humedad, fermentacion, 
+                              fecha_cosecha, fecha_ingreso, estado)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        """;
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -24,12 +27,12 @@ public class LoteDAO {
             stmt.setDouble(5, l.getFermentacion());
             stmt.setDate(6, l.getFechaCosecha());
             stmt.setDate(7, l.getFechaIngreso());
-            stmt.setDate(8, l.getFechaSalida());
-            stmt.setString(9, l.getEstado());
+            stmt.setString(8, l.getEstado());
 
             return stmt.executeUpdate() > 0;
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("❌ Error al insertar lote: " + e.getMessage());
         }
         return false;
     }
@@ -38,12 +41,23 @@ public class LoteDAO {
     public List<Lote> getAll() {
         List<Lote> list = new ArrayList<>();
         String sql = """
-                SELECT l.*, p.nombre AS nombre_producto, pe.nombre AS nombre_pedido
-                FROM lote l
-                JOIN producto p ON l.id_producto = p.id_producto
-                JOIN pedido pe ON l.id_pedido = pe.id_pedido
-                ORDER BY l.id_lote
-                """;
+            SELECT 
+                l.id_lote, 
+                l.id_producto, 
+                l.id_pedido, 
+                l.peso_total, 
+                l.humedad, 
+                l.fermentacion, 
+                l.fecha_cosecha, 
+                l.fecha_ingreso, 
+                l.estado,
+                p.nombre AS nombre_producto,
+                ped.id_pedido AS nombre_pedido
+            FROM lote l
+            JOIN producto p ON l.id_producto = p.id_producto
+            JOIN pedido ped ON l.id_pedido = ped.id_pedido
+            ORDER BY l.id_lote
+        """;
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -59,7 +73,6 @@ public class LoteDAO {
                 l.setFermentacion(rs.getDouble("fermentacion"));
                 l.setFechaCosecha(rs.getDate("fecha_cosecha"));
                 l.setFechaIngreso(rs.getDate("fecha_ingreso"));
-                l.setFechaSalida(rs.getDate("fecha_salida"));
                 l.setEstado(rs.getString("estado"));
                 l.setNombreProducto(rs.getString("nombre_producto"));
                 l.setNombrePedido(rs.getString("nombre_pedido"));
@@ -67,7 +80,7 @@ public class LoteDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("❌ Error al obtener lotes: " + e.getMessage());
         }
 
         return list;
@@ -75,8 +88,12 @@ public class LoteDAO {
 
     // UPDATE
     public boolean update(Lote l) {
-        String sql = "UPDATE lote SET id_producto=?, id_pedido=?, peso_total=?, humedad=?, fermentacion=?, " +
-                     "fecha_cosecha=?, fecha_ingreso=?, fecha_salida=?, estado=? WHERE id_lote=?";
+        String sql = """
+            UPDATE lote
+            SET id_producto=?, id_pedido=?, peso_total=?, humedad=?, fermentacion=?, 
+                fecha_cosecha=?, fecha_ingreso=?, estado=?
+            WHERE id_lote=?
+        """;
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -88,14 +105,13 @@ public class LoteDAO {
             stmt.setDouble(5, l.getFermentacion());
             stmt.setDate(6, l.getFechaCosecha());
             stmt.setDate(7, l.getFechaIngreso());
-            stmt.setDate(8, l.getFechaSalida());
-            stmt.setString(9, l.getEstado());
-            stmt.setInt(10, l.getIdLote());
+            stmt.setString(8, l.getEstado());
+            stmt.setInt(9, l.getIdLote());
 
             return stmt.executeUpdate() > 0;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("❌ Error al actualizar lote: " + e.getMessage());
         }
         return false;
     }
@@ -106,12 +122,15 @@ public class LoteDAO {
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
+
             stmt.setInt(1, id);
             return stmt.executeUpdate() > 0;
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("❌ Error al eliminar lote: " + e.getMessage());
         }
 
         return false;
     }
 }
+

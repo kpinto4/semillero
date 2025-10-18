@@ -1,47 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="653.0" prefWidth="641.0" spacing="20" style="-fx-background-color: #E3F2FD;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BodegaController">
+<VBox alignment="CENTER"
+      prefHeight="653.0"
+      prefWidth="641.0"
+      spacing="20"
+      style="-fx-background-color: #E3F2FD;"
+      stylesheets="@Style.css"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controller.BodegaController">
 
     <padding>
-        <Insets bottom="40" left="40" right="40" top="40" />
+        <Insets bottom="40" left="40" right="40" top="40"/>
     </padding>
 
-    <Label style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #0D47A1;" text="Gestionar Bodegas">
+    <!-- 🟦 Título -->
+    <Label text="Gestión de Bodegas"
+           style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #0D47A1;">
         <font>
-            <Font name="Arial" size="24" />
+            <Font name="Arial" size="24"/>
         </font>
         <effect>
-            <DropShadow color="#90CAF9" radius="3" />
+            <DropShadow color="#90CAF9" radius="3"/>
         </effect>
     </Label>
 
-    <TextField fx:id="nombreField" prefWidth="300" promptText="Nombre Bodega" />
-    <TextField fx:id="ubicacionField" prefWidth="300" promptText="Ubicación" />
-    <TextField fx:id="capacidadField" prefWidth="300" promptText="Capacidad (kg)" />
+    <!-- 🧾 Campos de entrada -->
+    <VBox spacing="10" alignment="CENTER">
 
-    <TableView fx:id="bodegaTable" prefHeight="200" prefWidth="700">
-        <columns>
-            <TableColumn fx:id="idColumn" prefWidth="50" text="ID" />
-            <TableColumn fx:id="nombreColumn" prefWidth="133.33329010009766" text="Nombre" />
-            <TableColumn fx:id="ubicacionColumn" prefWidth="135.99998474121094" text="Ubicación" />
-            <TableColumn fx:id="capacidadColumn" prefWidth="331.3333435058594" text="Capacidad" />
-        </columns>
-    </TableView>
+        <Label text="Nombre de la Bodega:" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="nombreField" prefWidth="300" promptText="nombre"/>
 
-    <Button fx:id="btnAdd" prefWidth="300" text="Agregar Bodega" />
-    <Button fx:id="btnUpdate" prefWidth="300" text="Actualizar Bodega" />
-    <Button fx:id="btnDelete" prefWidth="300" text="Eliminar Bodega" />
-    <Button fx:id="btnFetch" prefWidth="300" text="Mostrar Todas" />
-    
+        <Label text="Capacidad (kg):" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="capacidadField" prefWidth="300" promptText="capacidad"/>
+
+    </VBox>
+
+    <!-- 📊 Tabla de bodegas -->
+    <TitledPane text="Bodegas Registradas"
+                expanded="true"
+                collapsible="false">
+        <VBox spacing="10" alignment="CENTER">
+            <TableView fx:id="bodegaTable" prefHeight="200" prefWidth="700">
+                <columns>
+                    <TableColumn fx:id="idColumn" prefWidth="100" text="ID"/>
+                    <TableColumn fx:id="nombreColumn" prefWidth="250" text="Nombre"/>
+                    <TableColumn fx:id="capacidadColumn" prefWidth="250" text="Capacidad (kg)"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </TitledPane>
+
+    <!-- ⚙️ Botones de acción -->
+    <HBox spacing="15" alignment="CENTER">
+        <Button fx:id="btnAdd" prefWidth="150" text="Agregar" styleClass="primary-button"/>
+        <Button fx:id="btnUpdate" prefWidth="150" text="Actualizar" styleClass="info-button"/>
+        <Button fx:id="btnDelete" prefWidth="150" text="Eliminar" styleClass="danger-button"/>
+        <Button fx:id="btnFetch" prefWidth="150" text="Mostrar Todas" styleClass="neutral-button"/>
+    </HBox>
 
 </VBox>
+

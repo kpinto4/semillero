@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
 import model.Bodega;
 
@@ -14,7 +15,7 @@ import java.util.Optional;
 public class BodegaController {
 
     @FXML
-    private TextField nombreField, ubicacionField, capacidadField;
+    private TextField nombreField, capacidadField;
 
     @FXML
     private TableView<Bodega> bodegaTable;
@@ -22,8 +23,6 @@ public class BodegaController {
     private TableColumn<Bodega, Integer> idColumn;
     @FXML
     private TableColumn<Bodega, String> nombreColumn;
-    @FXML
-    private TableColumn<Bodega, String> ubicacionColumn;
     @FXML
     private TableColumn<Bodega, Double> capacidadColumn;
 
@@ -49,8 +48,15 @@ public class BodegaController {
             Bodega seleccionada = bodegaTable.getSelectionModel().getSelectedItem();
             if (seleccionada != null) {
                 nombreField.setText(seleccionada.getNombre());
-                ubicacionField.setText(seleccionada.getUbicacion());
                 capacidadField.setText(String.valueOf(seleccionada.getCapacidad()));
+            }
+        });
+
+        // ✅ Presionar ESC limpia la selección de la tabla
+        bodegaTable.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                bodegaTable.getSelectionModel().clearSelection();
+                clearFields();
             }
         });
     }
@@ -58,7 +64,6 @@ public class BodegaController {
     private void configurarTabla() {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("idBodega"));
         nombreColumn.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        ubicacionColumn.setCellValueFactory(new PropertyValueFactory<>("ubicacion"));
         capacidadColumn.setCellValueFactory(new PropertyValueFactory<>("capacidad"));
 
         bodegaTable.setItems(bodegaList);
@@ -78,7 +83,6 @@ public class BodegaController {
         try {
             Bodega nueva = new Bodega();
             nueva.setNombre(nombreField.getText().trim());
-            nueva.setUbicacion(ubicacionField.getText().trim());
             nueva.setCapacidad(Double.parseDouble(capacidadField.getText().trim()));
 
             bodegaDAO.insert(nueva);
@@ -101,7 +105,6 @@ public class BodegaController {
 
         try {
             seleccionada.setNombre(nombreField.getText().trim());
-            seleccionada.setUbicacion(ubicacionField.getText().trim());
             seleccionada.setCapacidad(Double.parseDouble(capacidadField.getText().trim()));
 
             bodegaDAO.update(seleccionada);
@@ -141,10 +144,9 @@ public class BodegaController {
 
     private boolean validarCampos() {
         String nombre = nombreField.getText().trim();
-        String ubicacion = ubicacionField.getText().trim();
         String capacidadTexto = capacidadField.getText().trim();
 
-        if (nombre.isEmpty() || ubicacion.isEmpty() || capacidadTexto.isEmpty()) {
+        if (nombre.isEmpty() || capacidadTexto.isEmpty()) {
             mostrarAlerta(Alert.AlertType.WARNING, "Campos vacíos", "Por favor, complete todos los campos.");
             return false;
         }
@@ -165,7 +167,6 @@ public class BodegaController {
 
     private void clearFields() {
         nombreField.clear();
-        ubicacionField.clear();
         capacidadField.clear();
         bodegaTable.getSelectionModel().clearSelection();
     }

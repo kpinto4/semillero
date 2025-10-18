@@ -10,12 +10,11 @@ public class BodegaDAO {
 
     // CREATE
     public boolean insert(Bodega b) {
-        String sql = "INSERT INTO bodega (nombre, capacidad, ubicacion) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO bodega (nombre, capacidad) VALUES (?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, b.getNombre());
             stmt.setDouble(2, b.getCapacidad());
-            stmt.setString(3, b.getUbicacion());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -34,8 +33,7 @@ public class BodegaDAO {
                 list.add(new Bodega(
                         rs.getInt("id_bodega"),
                         rs.getString("nombre"),
-                        rs.getDouble("capacidad"),
-                        rs.getString("ubicacion")
+                        rs.getDouble("capacidad")
                 ));
             }
         } catch (SQLException e) {
@@ -46,13 +44,12 @@ public class BodegaDAO {
 
     // UPDATE
     public boolean update(Bodega b) {
-        String sql = "UPDATE bodega SET nombre=?, capacidad=?, ubicacion=? WHERE id_bodega=?";
+        String sql = "UPDATE bodega SET nombre=?, capacidad=? WHERE id_bodega=?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, b.getNombre());
             stmt.setDouble(2, b.getCapacidad());
-            stmt.setString(3, b.getUbicacion());
-            stmt.setInt(4, b.getIdBodega());
+            stmt.setInt(3, b.getIdBodega());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();

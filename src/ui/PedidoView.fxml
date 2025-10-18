@@ -1,53 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20" style="-fx-background-color: #E3F2FD;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PedidoController">
+<ScrollPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.PedidoController"
+            fitToWidth="true"
+            style="-fx-background-color: #E3F2FD;"
+            stylesheets="@Style.css">
 
-    <padding>
-        <Insets bottom="40" left="40" right="40" top="40" />
-    </padding>
+    <VBox alignment="TOP_CENTER" spacing="20">
+        <padding>
+            <Insets top="40" right="40" bottom="40" left="40"/>
+        </padding>
+        
+        <Label style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: #0D47A1;"
+               text="Gestión de Pedidos">
+            <effect>
+                <DropShadow color="#90CAF9" radius="3" />
+            </effect>
+        </Label>
 
-    <Label style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #0D47A1;" text="Gestionar Pedidos">
-        <font>
-            <Font name="Arial" size="24" />
-        </font>
-        <effect>
-            <DropShadow color="#90CAF9" radius="3" />
-        </effect>
-    </Label>
+        <!-- Campos de formulario -->
+        <GridPane hgap="15" vgap="15">
+            <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" minWidth="150"/>
+                <ColumnConstraints halignment="LEFT" minWidth="250"/>
+            </columnConstraints>
 
-    <!-- ComboBox en lugar de TextField para la FK proveedor -->
-    <ComboBox fx:id="proveedorComboBox" prefWidth="300" promptText="Seleccionar Proveedor" />
-    
-    <DatePicker fx:id="fechaPicker" prefWidth="300" promptText="Fecha Creación" />
-    <CheckBox fx:id="recibidoCheckBox" text="Recibido" />
-    <TextField fx:id="observacionesField" prefWidth="300" promptText="Observaciones" />
+            <children>
+                <Label text="Proveedor:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="proveedorComboBox" prefWidth="250" 
+                          promptText="Seleccionar proveedor" 
+                          GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-    <TableView fx:id="pedidoTable" prefHeight="200" prefWidth="700">
-        <columns>
-            <TableColumn fx:id="idColumn" prefWidth="50" text="ID" />
-            <TableColumn fx:id="proveedorColumn" prefWidth="120" text="Proveedor" />
-            <TableColumn fx:id="fechaColumn" prefWidth="100" text="Fecha" />
-            <TableColumn fx:id="recibidoColumn" prefWidth="80" text="Recibido" />
-            <TableColumn fx:id="observacionesColumn" prefWidth="200" text="Observaciones" />
-        </columns>
-    </TableView>
+                <Label text="Producto:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="productoComboBox" prefWidth="250"
+                          promptText="Seleccionar producto"
+                          GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-    <Button fx:id="btnAdd" prefWidth="300" text="Agregar Pedido" />
-    <Button fx:id="btnUpdate" prefWidth="300" text="Actualizar Pedido" />
-    <Button fx:id="btnDelete" prefWidth="300" text="Eliminar Pedido" />
-    <Button fx:id="btnFetch" prefWidth="300" text="Mostrar Todos" />
+                <Label text="Fecha:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <DatePicker fx:id="fechaPicker" prefWidth="250" 
+                            promptText="Fecha creación"
+                            GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
-</VBox>
+                <Label text="Recibido:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <CheckBox fx:id="recibidoCheckBox" 
+                          text="Sí"
+                          GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                <Label text="Observaciones:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <TextField fx:id="observacionesField" prefWidth="250"
+                           promptText="Escriba observaciones"
+                           GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+            </children>
+        </GridPane>
+
+        <!-- Tabla -->
+        <TableView fx:id="pedidoTable" prefHeight="350" prefWidth="900">
+            <columns>
+                <TableColumn fx:id="idColumn" prefWidth="60" text="ID" />
+                <TableColumn fx:id="proveedorColumn" prefWidth="150" text="Proveedor" />
+                <TableColumn fx:id="productoColumn" prefWidth="150" text="Producto" />
+                <TableColumn fx:id="fechaColumn" prefWidth="120" text="Fecha" />
+                <TableColumn fx:id="recibidoColumn" prefWidth="100" text="Recibido" />
+                <TableColumn fx:id="observacionesColumn" prefWidth="300" text="Observaciones" />
+            </columns>
+        </TableView>
+
+        <!-- Botones -->
+        <HBox spacing="15" alignment="CENTER">
+            <Button fx:id="btnAdd" prefWidth="200" text="Agregar" />
+            <Button fx:id="btnUpdate" prefWidth="200" text="Actualizar" />
+            <Button fx:id="btnDelete" prefWidth="200" text="Eliminar" />
+            <Button fx:id="btnFetch" prefWidth="200" text="Mostrar Todos" />
+        </HBox>
+
+    </VBox>
+</ScrollPane>

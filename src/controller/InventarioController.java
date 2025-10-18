@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.util.StringConverter;
 import model.Bodega;
 import model.Inventario;
@@ -69,6 +70,14 @@ public class InventarioController {
 
         inventarioTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) fillForm(newSel);
+        });
+
+        // ✅ Presionar ESC limpia la selección y los campos
+        inventarioTable.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                inventarioTable.getSelectionModel().clearSelection();
+                clearFields();
+            }
         });
 
         refreshTable();

@@ -1,51 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20" style="-fx-background-color: #E3F2FD;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProveedorController">
+<ScrollPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.ProveedorController"
+            fitToWidth="true"
+            fitToHeight="true"
+            pannable="true"
+            style="-fx-background: #E3F2FD;"
+            stylesheets="@Style.css">
 
-    <padding>
-        <Insets bottom="40" left="40" right="40" top="40" />
-    </padding>
+    <!-- Contenedor principal desplazable -->
+    <VBox alignment="TOP_CENTER"
+          spacing="20"
+          style="-fx-background-color: #E3F2FD;"
+          prefWidth="800"
+          maxWidth="Infinity">
 
-    <Label style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #0D47A1;" text="Gestionar Proveedores">
-        <font>
-            <Font name="Arial" size="24" />
-        </font>
-        <effect>
-            <DropShadow color="#90CAF9" radius="3" />
-        </effect>
-    </Label>
+        <padding>
+            <Insets top="30" right="40" bottom="40" left="40" />
+        </padding>
 
-    <TextField fx:id="nombreField" prefWidth="300" promptText="Nombre" />
-    <TextField fx:id="telefonoField" prefWidth="300" promptText="Teléfono" />
-    <TextField fx:id="correoField" prefWidth="300" promptText="Correo" />
-    <TextField fx:id="ciudadField" prefWidth="300" promptText="Ciudad" />
-    <CheckBox fx:id="activoCheckBox" text="Activo" />
+        <!-- 🟦 Título principal -->
+        <Label text="Gestión de Proveedores"
+               style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: #0D47A1;">
+            <font>
+                <Font name="Arial" size="26" />
+            </font>
+            <effect>
+                <DropShadow color="#90CAF9" radius="3" />
+            </effect>
+        </Label>
 
-    <TableView fx:id="proveedorTable" prefHeight="200" prefWidth="700">
-        <columns>
-            <TableColumn fx:id="idColumn" prefWidth="50" text="ID" />
-            <TableColumn fx:id="nombreColumn" prefWidth="150" text="Nombre" />
-            <TableColumn fx:id="telefonoColumn" prefWidth="100" text="Teléfono" />
-            <TableColumn fx:id="correoColumn" prefWidth="150" text="Correo" />
-            <TableColumn fx:id="ciudadColumn" prefWidth="100" text="Ciudad" />
-            <TableColumn fx:id="activoColumn" prefWidth="80" text="Activo" />
-        </columns>
-    </TableView>
+        <!-- 🧾 Campos del formulario -->
+        <TitledPane text="Datos del Proveedor"
+                    expanded="true"
+                    collapsible="false"
+                    style="-fx-font-weight: bold;">
+            <VBox spacing="12" alignment="CENTER">
+                <TextField fx:id="nombreField" prefWidth="400" promptText="Nombre" />
+                <TextField fx:id="telefonoField" prefWidth="400" promptText="Teléfono" />
+                <TextField fx:id="correoField" prefWidth="400" promptText="Correo" />
+                <TextField fx:id="ciudadField" prefWidth="400" promptText="Ciudad" />
+                <CheckBox fx:id="activoCheckBox" text="Activo" />
+            </VBox>
+        </TitledPane>
 
-    <Button fx:id="btnAdd" prefWidth="300" text="Agregar Proveedor" />
-    <Button fx:id="btnUpdate" prefWidth="300" text="Actualizar Proveedor" />
-    <Button fx:id="btnDelete" prefWidth="300" text="Eliminar Proveedor" />
-    <Button fx:id="btnFetch" prefWidth="300" text="Mostrar Todos" />
+        <!-- 📋 Tabla de proveedores -->
+        <TitledPane text="Lista de Proveedores"
+                    expanded="true"
+                    collapsible="false">
+            <VBox spacing="10" alignment="CENTER">
+                <TableView fx:id="proveedorTable" prefHeight="250" prefWidth="700">
+                    <columns>
+                        <TableColumn fx:id="idColumn" prefWidth="50" text="ID" />
+                        <TableColumn fx:id="nombreColumn" prefWidth="150" text="Nombre" />
+                        <TableColumn fx:id="telefonoColumn" prefWidth="120" text="Teléfono" />
+                        <TableColumn fx:id="correoColumn" prefWidth="180" text="Correo" />
+                        <TableColumn fx:id="ciudadColumn" prefWidth="120" text="Ciudad" />
+                        <TableColumn fx:id="activoColumn" prefWidth="80" text="Activo" />
+                    </columns>
+                </TableView>
+            </VBox>
+        </TitledPane>
 
-</VBox>
+        <!-- ⚙️ Botones de acción -->
+        <HBox spacing="15" alignment="CENTER">
+            <Button fx:id="btnAdd" text="Agregar" styleClass="primary-button" prefWidth="150" />
+            <Button fx:id="btnUpdate" text="Actualizar" styleClass="info-button" prefWidth="150" />
+            <Button fx:id="btnDelete" text="Eliminar" styleClass="danger-button" prefWidth="150" />
+            <Button fx:id="btnFetch" text="Mostrar Todo" styleClass="neutral-button" prefWidth="150" />
+        </HBox>
+
+    </VBox>
+</ScrollPane>
+

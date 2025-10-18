@@ -4,15 +4,13 @@ public class Bodega {
     private int idBodega;
     private String nombre;
     private double capacidad;
-    private String ubicacion;
 
     public Bodega() {}
 
-    public Bodega(int idBodega, String nombre, double capacidad, String ubicacion) {
+    public Bodega(int idBodega, String nombre, double capacidad) {
         this.idBodega = idBodega;
         this.nombre = nombre;
         this.capacidad = capacidad;
-        this.ubicacion = ubicacion;
     }
 
     public int getIdBodega() {
@@ -37,13 +35,5 @@ public class Bodega {
 
     public void setCapacidad(double capacidad) {
         this.capacidad = capacidad;
-    }
-
-    public String getUbicacion() {
-        return ubicacion;
-    }
-
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
     }
 }

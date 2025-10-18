@@ -11,7 +11,6 @@ public class Lote {
     private double fermentacion;
     private Date fechaCosecha;
     private Date fechaIngreso;
-    private Date fechaSalida;
     private String estado;
 
     // Campos adicionales para mostrar nombres (FK)
@@ -22,9 +21,9 @@ public class Lote {
     public Lote() {
     }
 
-    // 🔹 Constructor completo
+    // 🔹 Constructor completo (sin fechaSalida)
     public Lote(int idLote, int idProducto, int idPedido, double pesoTotal, double humedad,
-                double fermentacion, Date fechaCosecha, Date fechaIngreso, Date fechaSalida,
+                double fermentacion, Date fechaCosecha, Date fechaIngreso,
                 String estado, String nombreProducto, String nombrePedido) {
         this.idLote = idLote;
         this.idProducto = idProducto;
@@ -34,7 +33,6 @@ public class Lote {
         this.fermentacion = fermentacion;
         this.fechaCosecha = fechaCosecha;
         this.fechaIngreso = fechaIngreso;
-        this.fechaSalida = fechaSalida;
         this.estado = estado;
         this.nombreProducto = nombreProducto;
         this.nombrePedido = nombrePedido;
@@ -105,14 +103,6 @@ public class Lote {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public Date getFechaSalida() {
-        return fechaSalida;
-    }
-
-    public void setFechaSalida(Date fechaSalida) {
-        this.fechaSalida = fechaSalida;
-    }
-
     public String getEstado() {
         return estado;
     }
@@ -148,7 +138,6 @@ public class Lote {
                 ", fermentacion=" + fermentacion +
                 ", fechaCosecha=" + fechaCosecha +
                 ", fechaIngreso=" + fechaIngreso +
-                ", fechaSalida=" + fechaSalida +
                 ", estado='" + estado + '\'' +
                 ", nombreProducto='" + nombreProducto + '\'' +
                 ", nombrePedido='" + nombrePedido + '\'' +
